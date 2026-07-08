@@ -1,0 +1,75 @@
+# 本地开发 profile：不依赖 Docker，用 H2 + 本地 Redis + InMemoryEmbeddingStore
+# 启动方式：-Dspring.profiles.active=local
+spring:
+  application:
+    name: llm-service
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+  # H2 内存数据库，启动时自动建表
+  datasource:
+    url: jdbc:h2:mem:llm_service;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;INIT=RUNSCRIPT FROM 'classpath:db/migration/V1__init_schema.sql'
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # 本地 Redis（需手动启动 E:\AsiaInfo-code\Workbench\redis\redis-server.exe）
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 3000ms
+
+# LLM 配置 - 通义千问（DashScope）
+# 没有API Key也能启动，调用LLM时会报错但不影响应用启动
+llm:
+  openai:
+    api-key: ${DASHSCOPE_API_KEY:sk-placeholder}
+    model: qwen-plus
+    base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  embedding:
+    model: text-embedding-v3
+    dimensions: 1024
+  milvus:
+    # local profile 下用 InMemoryEmbeddingStore，这个配置不会被使用
+    host: localhost
+    port: 19530
+    collection-name: llm_knowledge_base
+  rag:
+    chunk-size: 1000
+    chunk-overlap: 200
+    top-k: 5
+  # 本地开发的开关：使用 InMemoryEmbeddingStore 代替 Milvus
+  use-in-memory-embedding: true
+
+# 监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics,h2console
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# 日志
+logging:
+  level:
+    root: INFO
+    com.peanutai.llm: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Knife4j接口文档
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

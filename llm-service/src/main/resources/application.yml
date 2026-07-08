@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: llm-service
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+  # 业务数据库 - PostgreSQL（启用，原先被 exclude）
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:llm_service}
+    username: ${POSTGRES_USER:admin}
+    password: ${POSTGRES_PASSWORD:admin123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  # 缓存 - Redis（启用，用于后续限流/会话/Token统计）
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 5
+
+# LLM配置
+llm:
+  openai:
+    api-key: ${DASHSCOPE_API_KEY:}
+    model: ${LLM_MODEL:qwen-plus}
+    base-url: ${LLM_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+  embedding:
+    model: ${EMBEDDING_MODEL:text-embedding-v3}
+    dimensions: ${EMBEDDING_DIMENSIONS:1024}
+  milvus:
+    host: ${MILVUS_HOST:localhost}
+    port: ${MILVUS_PORT:19530}
+    collection-name: ${MILVUS_COLLECTION:llm_knowledge_base}
+  rag:
+    chunk-size: 1000
+    chunk-overlap: 200
+    top-k: 5
+  use-in-memory-embedding: true
+
+# 监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# 日志
+logging:
+  level:
+    root: INFO
+    com.peanutai.llm: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Knife4j接口文档
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

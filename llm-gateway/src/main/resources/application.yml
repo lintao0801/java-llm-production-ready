@@ -1,0 +1,19 @@
+# Spring Cloud Gateway 路由配置
+# 定义 LLM 网关服务的基本配置和路由规则
+spring:
+  application:
+    name: llm-gateway
+  cloud:
+    gateway:
+      routes:
+        # 路由规则：LLM 服务代理
+        # 将所有 /api/v1/** 的请求转发到后端 LLM 服务
+        - id: llm-service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/**
+          filters:
+            - StripPrefix=0
+
+server:
+  port: 8081
