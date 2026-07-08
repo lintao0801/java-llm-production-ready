@@ -25,3 +25,5 @@ logs/
 
 # Docker
 docker-compose.override.yml
+/.trae/
+/frontend/node_modules/
