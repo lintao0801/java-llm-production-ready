@@ -88,6 +88,11 @@
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-milvus</artifactId>
         </dependency>
+        <!-- Cohere 重排序模型（可选，用于 Advanced RAG 的 Re-Ranking 能力） -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-cohere</artifactId>
+        </dependency>
 
         <!-- 文档解析 -->
         <dependency>

@@ -7,11 +7,13 @@ import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
+import dev.langchain4j.model.scoring.ScoringModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import dev.langchain4j.store.embedding.milvus.MilvusEmbeddingStore;
 import io.milvus.param.MetricType;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -107,6 +109,28 @@ public class LangChain4jConfig {
                 .dimension(embeddingDimensions)
                 .metricType(MetricType.COSINE)
                 .autoFlushOnInsert(true)
+                .build();
+    }
+
+    /**
+     * 重排序模型（可选，用于 Advanced RAG 的 Re-Ranking 能力）
+     * <p>
+     * 当配置了 llm.rerank.provider=cohere 且提供 COHERE_API_KEY 时启用。
+     * 支持 Cohere 等主流重排序模型。
+     * <p>
+     * 若不配置，ReRankingContentAggregator 不会启用，将回退到 RRF 融合排序。
+     *
+     * @see <a href="https://docs.langchain4j.dev/category/scoring-reranking-models">LangChain4j Scoring Models</a>
+     */
+    @Bean
+    @ConditionalOnProperty(name = "llm.rerank.provider", havingValue = "cohere")
+    public ScoringModel scoringModel(
+            @Value("${llm.rerank.cohere.api-key:}") String cohereApiKey,
+            @Value("${llm.rerank.cohere.model:rerank-english-v3.0}") String cohereModel) {
+        return dev.langchain4j.model.cohere.CohereScoringModel.builder()
+                .apiKey(cohereApiKey)
+                .modelName(cohereModel)
+                .timeout(Duration.ofSeconds(30))
                 .build();
     }
 }

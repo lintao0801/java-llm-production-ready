@@ -46,7 +46,14 @@ llm:
     chunk-size: 1000
     chunk-overlap: 200
     top-k: 5
-  use-in-memory-embedding: true
+    min-score: 0.6
+  # Advanced RAG 重排序配置（可选，需要 Cohere API Key）
+  rerank:
+    provider: ${RERANK_PROVIDER:} # 可选值: cohere，留空则不启用重排序
+    cohere:
+      api-key: ${COHERE_API_KEY:}
+      model: ${COHERE_RERANK_MODEL:rerank-english-v3.0}
+  use-in-memory-embedding: false
 
 # 监控
 management:
