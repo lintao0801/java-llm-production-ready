@@ -28,7 +28,7 @@ async function sendMessage() {
   if (!question || isLoading.value) return
 
   if (!knowledgeBaseId.value) {
-    alert('è¯·å…ˆè¾“å…¥çŸ¥è¯†åº“ ID')
+    alert('ÇëÏÈÊäÈëÖªÊ¶¿â ID')
     return
   }
 
@@ -63,7 +63,7 @@ async function sendMessage() {
       }
     )
   } catch {
-    assistantMsg.content += '\n\n[è¯·æ±‚å¤±è´¥ï¼Œè¯·æ£€æŸ¥åç«¯æœåŠ¡æ˜¯å¦æ­£å¸¸è¿è¡Œ]'
+    assistantMsg.content += '\n\n[ÇëÇóÊ§°Ü£¬Çë¼ì²éºó¶Ë·şÎñÊÇ·ñÕı³£ÔËĞĞ]'
   }
 }
 
@@ -77,18 +77,18 @@ function handleKeydown(e: KeyboardEvent) {
 
 <template>
   <div class="flex flex-col h-full">
-    <!-- é¡¶éƒ¨æ  -->
+    <!-- ¶¥²¿À¸ -->
     <header class="h-16 glass-effect border-b border-white/5 flex items-center px-8 gap-4 relative z-10">
       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/20 to-accent/20 flex items-center justify-center">
         <Sparkles class="w-4 h-4 text-primary-400" />
       </div>
-      <h1 class="text-white font-semibold text-base">æ™ºèƒ½é—®ç­”</h1>
+      <h1 class="text-white font-semibold text-base">ÖÇÄÜÎÊ´ğ</h1>
       <span class="text-xs text-white/30 bg-white/5 px-2 py-0.5 rounded-md">RAG</span>
       <div class="flex-1" />
       <div class="relative">
         <input
           v-model="knowledgeBaseId"
-          placeholder="è¾“å…¥çŸ¥è¯†åº“ ID"
+          placeholder="ÊäÈëÖªÊ¶¿â ID"
           class="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white
                  placeholder-white/25 focus:outline-none focus:border-primary-500/40 w-72
                  transition-all duration-300 focus:shadow-glow"
@@ -96,24 +96,24 @@ function handleKeydown(e: KeyboardEvent) {
       </div>
     </header>
 
-    <!-- æ¶ˆæ¯åˆ—è¡¨ -->
+    <!-- ÏûÏ¢ÁĞ±í -->
     <div ref="chatContainer" class="flex-1 overflow-y-auto scrollbar-thin py-6">
-      <!-- ç©ºçŠ¶æ€ -->
+      <!-- ¿Õ×´Ì¬ -->
       <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full">
         <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary-500/10 to-accent/10 flex items-center justify-center mb-6 shadow-glow">
           <Sparkles class="w-10 h-10 text-primary-400/60" />
         </div>
-        <p class="text-white/50 text-lg font-medium">å¼€å§‹ä¸ AI å¯¹è¯</p>
-        <p class="text-white/25 text-sm mt-2">è¾“å…¥çŸ¥è¯†åº“ IDï¼Œç„¶åæå‡ºä½ çš„é—®é¢˜</p>
+        <p class="text-white/50 text-lg font-medium">¿ªÊ¼Óë AI ¶Ô»°</p>
+        <p class="text-white/25 text-sm mt-2">ÊäÈëÖªÊ¶¿â ID£¬È»ºóÌá³öÄãµÄÎÊÌâ</p>
         <div class="flex gap-3 mt-8">
           <div class="glass-effect rounded-xl px-4 py-2.5 text-xs text-white/30">
-            æ”¯æŒæµå¼è¾“å‡º
+            Ö§³ÖÁ÷Ê½Êä³ö
           </div>
           <div class="glass-effect rounded-xl px-4 py-2.5 text-xs text-white/30">
-            å±•ç¤ºå¼•ç”¨æ¥æº
+            Õ¹Ê¾ÒıÓÃÀ´Ô´
           </div>
           <div class="glass-effect rounded-xl px-4 py-2.5 text-xs text-white/30">
-            å¤šçŸ¥è¯†åº“æ£€ç´¢
+            ¶àÖªÊ¶¿â¼ìË÷
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ function handleKeydown(e: KeyboardEvent) {
         />
       </template>
 
-      <!-- åŠ è½½æŒ‡ç¤º -->
+      <!-- ¼ÓÔØÖ¸Ê¾ -->
       <div v-if="isLoading && messages.length > 0 && messages[messages.length - 1].content === ''" class="flex gap-4 px-6 py-3 animate-fade-in">
         <div class="w-10 h-10 rounded-xl glass-effect flex items-center justify-center">
           <Loader2 class="w-5 h-5 text-primary-400 animate-spin" />
@@ -141,14 +141,14 @@ function handleKeydown(e: KeyboardEvent) {
       </div>
     </div>
 
-    <!-- è¾“å…¥åŒºåŸŸ -->
+    <!-- ÊäÈëÇøÓò -->
     <div class="glass-effect border-t border-white/5 p-5 relative z-10">
       <div class="flex items-end gap-4 max-w-4xl mx-auto">
         <div class="flex-1 relative">
           <textarea
             v-model="input"
             @keydown="handleKeydown"
-            placeholder="è¾“å…¥ä½ çš„é—®é¢˜... (Enter å‘é€, Shift+Enter æ¢è¡Œ)"
+            placeholder="ÊäÈëÄãµÄÎÊÌâ... (Enter ·¢ËÍ, Shift+Enter »»ĞĞ)"
             rows="1"
             class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-white
                    placeholder-white/20 focus:outline-none focus:border-primary-500/40 resize-none

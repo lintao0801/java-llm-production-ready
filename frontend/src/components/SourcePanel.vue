@@ -19,7 +19,7 @@ const expanded = ref(false)
       <div class="w-6 h-6 rounded-md bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
         <Link2 class="w-3 h-3" />
       </div>
-      <span>寮曠敤鏉ユ簮 ({{ sources.length }})</span>
+      <span>引用来源 ({{ sources.length }})</span>
       <ChevronDown v-if="!expanded" class="w-3 h-3 transition-transform" />
       <ChevronUp v-else class="w-3 h-3 transition-transform" />
     </button>

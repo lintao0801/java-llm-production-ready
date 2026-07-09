@@ -12,7 +12,7 @@ defineProps<{
     class="flex gap-4 px-6 py-3 animate-fade-in"
     :class="message.role === 'user' ? 'flex-row-reverse' : 'flex-row'"
   >
-    <!-- 澶村儚 -->
+    <!-- 头像 -->
     <div
       class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
       :class="message.role === 'user'
@@ -23,7 +23,7 @@ defineProps<{
       <Bot v-else class="w-5 h-5 text-primary-400" />
     </div>
 
-    <!-- 娑堟伅鍐呭 -->
+    <!-- 消息内容 -->
     <div class="max-w-[70%] flex flex-col" :class="message.role === 'user' ? 'items-end' : 'items-start'">
       <div
         class="rounded-2xl px-5 py-3.5 relative overflow-hidden"

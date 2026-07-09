@@ -26,7 +26,7 @@ async function handleDelete() {
     await knowledgeBaseApi.delete(deleteTargetId.value)
     store.removeKnowledgeBase(deleteTargetId.value)
   } catch {
-    alert('åˆ é™¤å¤±è´¥')
+    alert('É¾³ıÊ§°Ü')
   }
   showDeleteConfirm.value = false
 }
@@ -39,25 +39,25 @@ function onUploaded() {
 
 <template>
   <div class="flex flex-col h-full">
-    <!-- é¡¶éƒ¨æ  -->
+    <!-- ¶¥²¿À¸ -->
     <header class="h-16 glass-effect border-b border-white/5 flex items-center px-8 gap-4 relative z-10">
       <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/20 to-accent/20 flex items-center justify-center">
         <Database class="w-4 h-4 text-primary-400" />
       </div>
-      <h1 class="text-white font-semibold text-base">çŸ¥è¯†åº“ç®¡ç†</h1>
+      <h1 class="text-white font-semibold text-base">ÖªÊ¶¿â¹ÜÀí</h1>
     </header>
 
     <div class="flex-1 overflow-y-auto scrollbar-thin p-8">
-      <!-- æ“ä½œåŒº -->
+      <!-- ²Ù×÷Çø -->
       <div class="glass-effect rounded-2xl p-6 mb-8">
         <div class="flex items-center gap-3 mb-4">
           <Upload class="w-5 h-5 text-primary-400" />
-          <h3 class="text-white font-medium">ä¸Šä¼ æ–‡æ¡£</h3>
+          <h3 class="text-white font-medium">ÉÏ´«ÎÄµµ</h3>
         </div>
         <div class="flex gap-4">
           <input
             v-model="selectedKbId"
-            placeholder="è¯·è¾“å…¥çŸ¥è¯†åº“ ID"
+            placeholder="ÇëÊäÈëÖªÊ¶¿â ID"
             class="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-sm text-white
                    placeholder-white/20 focus:outline-none focus:border-primary-500/40 transition-all duration-300"
           />
@@ -69,19 +69,19 @@ function onUploaded() {
                    disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
           >
             <Plus class="w-4 h-4" />
-            ä¸Šä¼ æ–‡æ¡£
+            ÉÏ´«ÎÄµµ
           </button>
         </div>
 
-        <!-- ä¸Šä¼ é¢æ¿ -->
+        <!-- ÉÏ´«Ãæ°å -->
         <div v-if="showUpload && selectedKbId" class="mt-6 pt-6 border-t border-white/5 animate-fade-in">
           <FileUpload :knowledge-base-id="selectedKbId" @uploaded="onUploaded" />
         </div>
       </div>
 
-      <!-- çŸ¥è¯†åº“åˆ—è¡¨ -->
+      <!-- ÖªÊ¶¿âÁĞ±í -->
       <div>
-        <h3 class="text-sm text-white/40 mb-4 font-medium uppercase tracking-wider">çŸ¥è¯†åº“åˆ—è¡¨</h3>
+        <h3 class="text-sm text-white/40 mb-4 font-medium uppercase tracking-wider">ÖªÊ¶¿âÁĞ±í</h3>
         <div
           v-if="store.knowledgeBases.length === 0"
           class="flex flex-col items-center justify-center py-20"
@@ -89,8 +89,8 @@ function onUploaded() {
           <div class="w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center mb-6">
             <FolderOpen class="w-10 h-10 text-white/15" />
           </div>
-          <p class="text-white/30 text-base">æš‚æ— çŸ¥è¯†åº“</p>
-          <p class="text-white/15 text-sm mt-2">è¾“å…¥çŸ¥è¯†åº“ ID å¹¶ä¸Šä¼ æ–‡æ¡£æ¥åˆ›å»º</p>
+          <p class="text-white/30 text-base">ÔİÎŞÖªÊ¶¿â</p>
+          <p class="text-white/15 text-sm mt-2">ÊäÈëÖªÊ¶¿â ID ²¢ÉÏ´«ÎÄµµÀ´´´½¨</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -119,28 +119,28 @@ function onUploaded() {
       </div>
     </div>
 
-    <!-- åˆ é™¤ç¡®è®¤å¼¹çª— -->
+    <!-- É¾³ıÈ·ÈÏµ¯´° -->
     <div
       v-if="showDeleteConfirm"
       class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in"
       @click.self="showDeleteConfirm = false"
     >
       <div class="glass-effect rounded-2xl p-8 w-[400px] shadow-glow-lg">
-        <h3 class="text-white font-semibold text-lg mb-2">ç¡®è®¤åˆ é™¤</h3>
-        <p class="text-sm text-white/40 mb-8">ç¡®å®šè¦åˆ é™¤è¿™ä¸ªçŸ¥è¯†åº“å—ï¼Ÿæ­¤æ“ä½œä¸å¯æ’¤é”€ã€‚</p>
+        <h3 class="text-white font-semibold text-lg mb-2">È·ÈÏÉ¾³ı</h3>
+        <p class="text-sm text-white/40 mb-8">È·¶¨ÒªÉ¾³ıÕâ¸öÖªÊ¶¿âÂğ£¿´Ë²Ù×÷²»¿É³·Ïú¡£</p>
         <div class="flex justify-end gap-3">
           <button
             @click="showDeleteConfirm = false"
             class="px-5 py-2.5 rounded-xl text-sm text-white/50 hover:text-white glass-effect transition-colors"
           >
-            å–æ¶ˆ
+            È¡Ïû
           </button>
           <button
             @click="handleDelete"
             class="px-5 py-2.5 rounded-xl bg-red-500/20 text-red-400 text-sm font-medium
                    hover:bg-red-500/30 transition-colors border border-red-500/20"
           >
-            ç¡®è®¤åˆ é™¤
+            È·ÈÏÉ¾³ı
           </button>
         </div>
       </div>
