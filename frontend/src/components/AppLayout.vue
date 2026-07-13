@@ -7,9 +7,9 @@ const route = useRoute()
 const router = useRouter()
 
 const menuItems = [
-  { path: '/chat', label: 'ÖÇÄÜÎÊ´ð', icon: MessageSquare, desc: 'RAG ÖªÊ¶¿âÎÊ´ð' },
-  { path: '/knowledge', label: 'ÖªÊ¶¿â¹ÜÀí', icon: Database, desc: '¹ÜÀíÎÄµµºÍÖªÊ¶¿â' },
-  { path: '/simple-chat', label: '¼òµ¥¶Ô»°', icon: MessageCircle, desc: 'Ö±½Ó AI ¶Ô»°' }
+  { path: '/chat', label: 'æ™ºèƒ½é—®ç­”', icon: MessageSquare, desc: 'RAG çŸ¥è¯†åº“é—®ç­”' },
+  { path: '/knowledge', label: 'çŸ¥è¯†åº“ç®¡ç†', icon: Database, desc: 'ç®¡ç†æ–‡æ¡£å’ŒçŸ¥è¯†åº“' },
+  { path: '/simple-chat', label: 'ç®€å•å¯¹è¯', icon: MessageCircle, desc: 'ç›´æŽ¥ AI å¯¹è¯' }
 ]
 
 const isActive = (path: string) => computed(() => route.path === path)
@@ -17,9 +17,9 @@ const isActive = (path: string) => computed(() => route.path === path)
 
 <template>
   <div class="flex h-screen overflow-hidden bg-gradient-dark">
-    <!-- ²à±ßµ¼º½ -->
+    <!-- ä¾§è¾¹å¯¼èˆª -->
     <aside class="w-72 glass-effect flex flex-col relative">
-      <!-- ×°ÊÎÐÔ±³¾° -->
+      <!-- è£…é¥°æ€§èƒŒæ™¯ -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute -top-20 -left-20 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-accent/10 rounded-full blur-3xl"></div>
@@ -32,27 +32,27 @@ const isActive = (path: string) => computed(() => route.path === path)
             <Sparkles class="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 class="text-white font-bold text-lg">ÖÇÄÜÖªÊ¶¿â</h1>
+            <h1 class="text-white font-bold text-lg">æ™ºèƒ½çŸ¥è¯†åº“</h1>
             <p class="text-xs text-white/40">AI Knowledge Base</p>
           </div>
         </div>
       </div>
 
-      <!-- µ¼º½²Ëµ¥ -->
+      <!-- å¯¼èˆªèœå• -->
       <nav class="flex-1 py-6 px-4 relative z-10">
         <div class="space-y-2">
           <button
-            v-for="item in menuItems"
-            :key="item.path"
-            @click="router.push(item.path)"
-            class="w-full flex items-start gap-4 px-4 py-4 rounded-xl text-left transition-all duration-300 group"
-            :class="isActive(item.path).value
+              v-for="item in menuItems"
+              :key="item.path"
+              @click="router.push(item.path)"
+              class="w-full flex items-start gap-4 px-4 py-4 rounded-xl text-left transition-all duration-300 group"
+              :class="isActive(item.path).value
               ? 'bg-gradient-to-r from-primary-500/20 to-accent/20 shadow-glow border border-primary-500/30'
               : 'hover:bg-white/5 border border-transparent'"
           >
             <div
-              class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300"
-              :class="isActive(item.path).value
+                class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                :class="isActive(item.path).value
                 ? 'bg-gradient-primary shadow-glow'
                 : 'bg-white/5 group-hover:bg-white/10'"
             >
@@ -60,8 +60,8 @@ const isActive = (path: string) => computed(() => route.path === path)
             </div>
             <div class="flex-1 min-w-0">
               <div
-                class="font-medium text-sm mb-1 transition-colors"
-                :class="isActive(item.path).value ? 'text-white' : 'text-white/70 group-hover:text-white'"
+                  class="font-medium text-sm mb-1 transition-colors"
+                  :class="isActive(item.path).value ? 'text-white' : 'text-white/70 group-hover:text-white'"
               >
                 {{ item.label }}
               </div>
@@ -71,7 +71,7 @@ const isActive = (path: string) => computed(() => route.path === path)
         </div>
       </nav>
 
-      <!-- µ×²¿ÐÅÏ¢ -->
+      <!-- åº•éƒ¨ä¿¡æ¯ -->
       <div class="p-6 border-t border-white/5 relative z-10">
         <div class="text-center">
           <div class="text-xs text-white/30 mb-1">RAG Knowledge Base</div>
@@ -80,9 +80,9 @@ const isActive = (path: string) => computed(() => route.path === path)
       </div>
     </aside>
 
-    <!-- Ö÷ÄÚÈÝÇø -->
+    <!-- ä¸»å†…å®¹åŒº -->
     <main class="flex-1 overflow-hidden relative">
-      <!-- ×°ÊÎÐÔ±³¾° -->
+      <!-- è£…é¥°æ€§èƒŒæ™¯ -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>

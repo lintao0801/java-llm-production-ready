@@ -14,6 +14,7 @@ import dev.langchain4j.rag.content.injector.ContentInjector;
 import dev.langchain4j.rag.content.injector.DefaultContentInjector;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
+import dev.langchain4j.rag.query.Metadata;
 import dev.langchain4j.rag.query.Query;
 import dev.langchain4j.rag.query.transformer.CompressingQueryTransformer;
 import dev.langchain4j.rag.query.transformer.ExpandingQueryTransformer;
@@ -114,12 +115,12 @@ public class AdvancedRagPipeline {
      * @return 增强结果
      */
     public AugmentationResult augment(String question,
-                                       String knowledgeBaseId,
-                                       Integer topK,
-                                       Boolean enableQueryExpansion,
-                                       Boolean enableRerank,
-                                       List<ChatMessage> historyMessages,
-                                       Map<String, String> metadataFilters) {
+                                      String knowledgeBaseId,
+                                      Integer topK,
+                                      Boolean enableQueryExpansion,
+                                      Boolean enableRerank,
+                                      List<ChatMessage> historyMessages,
+                                      Map<String, String> metadataFilters) {
 
         int maxResults = (topK != null && topK > 0) ? topK : defaultTopK;
 
@@ -138,8 +139,17 @@ public class AdvancedRagPipeline {
         // [4] 构建 ContentInjector（注入检索内容到 Prompt）
         ContentInjector contentInjector = buildContentInjector();
 
-        // [5] 创建 Query 对象
-        Query query = Query.from(question);
+        // [5] 创建 Query 对象（带聊天记忆用于查询压缩）
+        Query query;
+        if (historyMessages != null && !historyMessages.isEmpty()) {
+            Metadata metadata = Metadata.builder()
+                    .chatMessage(UserMessage.from(question))
+                    .chatMemory(historyMessages)
+                    .build();
+            query = Query.from(question, metadata);
+        } else {
+            query = Query.from(question);
+        }
 
         // [6] 查询转换（可能扩展为多个查询）
         Collection<Query> queries = queryTransformer.transform(query);
@@ -174,8 +184,8 @@ public class AdvancedRagPipeline {
      * 构建 ContentRetriever，支持动态元数据过滤
      */
     private ContentRetriever buildContentRetriever(int maxResults,
-                                                    String knowledgeBaseId,
-                                                    Map<String, String> metadataFilters) {
+                                                   String knowledgeBaseId,
+                                                   Map<String, String> metadataFilters) {
         var builder = EmbeddingStoreContentRetriever.builder()
                 .embeddingStore(embeddingStore)
                 .embeddingModel(embeddingModel)
@@ -207,7 +217,7 @@ public class AdvancedRagPipeline {
      * 2. ExpandingQueryTransformer - 将查询扩展为多个变体
      */
     private QueryTransformer buildQueryTransformer(boolean enableQueryExpansion,
-                                                    List<ChatMessage> historyMessages) {
+                                                   List<ChatMessage> historyMessages) {
         List<QueryTransformer> transformers = new ArrayList<>();
 
         // 查询压缩：当有历史对话时，将上下文压缩为独立查询

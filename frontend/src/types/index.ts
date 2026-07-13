@@ -22,11 +22,30 @@ export interface RagResponse {
   conversationId: string
 }
 
+export interface ChatMessage {
+  role: 'user' | 'assistant' | 'system'
+  content: string
+}
+
+export interface RagRequest {
+  question: string
+  knowledgeBaseId: string
+  topK?: number
+  temperature?: number
+  stream?: boolean
+  conversationId?: string
+  historyMessages?: ChatMessage[]
+  enableQueryExpansion?: boolean
+  enableRerank?: boolean
+  metadataFilters?: Record<string, string>
+}
+
 export interface Message {
   id: string
   role: 'user' | 'assistant'
   content: string
   sources?: DocumentSource[]
+  tokenUsage?: TokenUsage
   timestamp: number
 }
 

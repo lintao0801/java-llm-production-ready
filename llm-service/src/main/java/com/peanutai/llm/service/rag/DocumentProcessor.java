@@ -22,7 +22,11 @@ public class DocumentProcessor {
 
     public String parse(MultipartFile file) throws IOException {
         try (InputStream is = file.getInputStream()) {
-            return tika.parseToString(is);
+            String content = tika.parseToString(is);
+            if (content == null || content.isBlank()) {
+                throw new IOException("文档内容为空，无法解析: " + file.getOriginalFilename());
+            }
+            return content.strip();
         } catch (TikaException e) {
             throw new IOException("文档解析失败: " + file.getOriginalFilename(), e);
         }
@@ -31,11 +35,12 @@ public class DocumentProcessor {
     public List<TextSegment> chunk(String content) {
         List<TextSegment> chunks = new ArrayList<>();
         int length = content.length();
-        // 滑动窗口分块，重叠避免语义被切断
         for (int start = 0; start < length; start += (CHUNK_SIZE - CHUNK_OVERLAP)) {
             int end = Math.min(start + CHUNK_SIZE, length);
-            String chunk = content.substring(start, end);
-            chunks.add(TextSegment.from(chunk));
+            String chunk = content.substring(start, end).strip();
+            if (!chunk.isBlank()) {
+                chunks.add(TextSegment.from(chunk));
+            }
         }
 
         return chunks;

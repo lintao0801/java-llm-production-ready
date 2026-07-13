@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { Result, RagResponse } from '@/types'
+import type { Result, RagResponse, RagRequest } from '@/types'
 
 const api = axios.create({
   baseURL: '/api/v1',
@@ -41,21 +41,11 @@ export const knowledgeBaseApi = {
 }
 
 export const ragApi = {
-  query(params: {
-    question: string
-    knowledgeBaseId: string
-    topK?: number
-    temperature?: number
-  }) {
+  query(params: RagRequest) {
     return api.post<Result<RagResponse>>('/rag/query', params)
   },
   
-  queryStream(params: {
-    question: string
-    knowledgeBaseId: string
-    topK?: number
-    temperature?: number
-  }) {
+  queryStream(params: RagRequest) {
     return fetch('/api/v1/rag/query/stream', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

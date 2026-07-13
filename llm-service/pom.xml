@@ -12,10 +12,10 @@
 
     <artifactId>llm-service</artifactId>
     <name>llm-service</name>
-    <description>ºËÐÄÒµÎñÄ£¿é - RAG¡¢Agent¡¢¶Ô»°¹ÜÀí¡¢·À»¤²ã¡¢¼à¿Ø</description>
+    <description>ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ä£ï¿½ï¿½ - RAGï¿½ï¿½Agentï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¡¢ï¿½ï¿½ï¿½</description>
 
     <dependencies>
-        <!-- ÄÚ²¿Ä£¿é -->
+        <!-- ï¿½Ú²ï¿½Ä£ï¿½ï¿½ -->
         <dependency>
             <groupId>com.peanutai</groupId>
             <artifactId>llm-common</artifactId>
@@ -40,7 +40,7 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Êý¾Ý¿â -->
+        <!-- ï¿½ï¿½ï¿½Ý¿ï¿½ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -50,7 +50,7 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- ±¾µØ¿ª·¢ÓÃ H2 ÄÚ´æÊý¾Ý¿â£¬±ÜÃâÒÀÀµ PostgreSQL -->
+        <!-- ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ H2 ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ý¿â£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PostgreSQL -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -94,7 +94,7 @@
             <artifactId>langchain4j-cohere</artifactId>
         </dependency>
 
-        <!-- ÎÄµµ½âÎö -->
+        <!-- ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ -->
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
@@ -106,7 +106,7 @@
             <version>2.9.2</version>
         </dependency>
 
-        <!-- ·À»¤²ã -->
+        <!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -->
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot3</artifactId>
@@ -120,7 +120,7 @@
             <artifactId>resilience4j-retry</artifactId>
         </dependency>
 
-        <!-- ¼à¿Ø -->
+        <!-- ï¿½ï¿½ï¿½ -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
@@ -130,7 +130,7 @@
             <artifactId>micrometer-tracing-bridge-otel</artifactId>
         </dependency>
 
-        <!-- ¹¤¾ß¿â -->
+        <!-- ï¿½ï¿½ï¿½ß¿ï¿½ -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -147,7 +147,7 @@
             <version>${knife4j.version}</version>
         </dependency>
 
-        <!-- ²âÊÔ -->
+        <!-- ï¿½ï¿½ï¿½ï¿½ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

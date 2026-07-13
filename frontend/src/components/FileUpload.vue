@@ -61,66 +61,66 @@ function clearFiles() {
 
 <template>
   <div class="space-y-5">
-    <!-- мов╖ио╢╚гЬсР -->
+    <!-- Ф▀√Ф▀╫Д╦┼Д╪═Е▄╨Е÷÷ -->
     <label
-      class="block border border-dashed border-white/10 rounded-2xl p-10 text-center cursor-pointer
+        class="block border border-dashed border-white/10 rounded-2xl p-10 text-center cursor-pointer
              hover:border-primary-500/30 hover:bg-primary-500/5 transition-all duration-300 group"
     >
       <input
-        type="file"
-        multiple
-        class="hidden"
-        @change="onFileSelect"
-        accept=".pdf,.doc,.docx,.txt,.md"
+          type="file"
+          multiple
+          class="hidden"
+          @change="onFileSelect"
+          accept=".pdf,.doc,.docx,.txt,.md"
       />
       <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:shadow-glow transition-all duration-300">
         <Upload class="w-7 h-7 text-primary-400" />
       </div>
-      <p class="text-sm text-white/60 group-hover:text-white/80 transition-colors">╣Ц╩В╩Рмов╖нд╪Ч╣╫╢к╢╕ио╢╚</p>
-      <p class="text-xs text-white/30 mt-2">ж╖Ёж PDF║╒Word║╒TXT║╒Markdown ╦Яй╫</p>
+      <p class="text-sm text-white/60 group-hover:text-white/80 transition-colors">Г┌╧Е┤╩Ф┬√Ф▀√Ф▀╫Ф√┤Д╩╤Е┬╟Ф╜╓Е╓└Д╦┼Д╪═</p>
+      <p class="text-xs text-white/30 mt-2">Ф■╞Ф▄│ PDFЦ─│WordЦ─│TXTЦ─│Markdown Ф═╪Е╪▐</p>
     </label>
 
-    <!-- нд╪Чап╠М -->
+    <!-- Ф√┤Д╩╤Е┬≈Х║╗ -->
     <div v-if="files.length > 0" class="space-y-3">
       <div class="flex items-center justify-between">
-        <span class="text-sm text-white/50">ряя║тЯ {{ files.length }} ╦Жнд╪Ч</span>
+        <span class="text-sm text-white/50">Е╥╡И─┴Ф▀╘ {{ files.length }} Д╦╙Ф√┤Д╩╤</span>
         <button
-          @click="clearFiles"
-          class="text-xs text-white/30 hover:text-white/60 transition-colors"
+            @click="clearFiles"
+            class="text-xs text-white/30 hover:text-white/60 transition-colors"
         >
-          гЕ©у
+          Ф╦┘Г╘╨
         </button>
       </div>
 
       <div class="space-y-1.5 max-h-48 overflow-y-auto scrollbar-thin">
         <div
-          v-for="(file, index) in files"
-          :key="index"
-          class="flex items-center gap-3 glass-effect rounded-xl px-4 py-2.5 animate-slide-in"
+            v-for="(file, index) in files"
+            :key="index"
+            class="flex items-center gap-3 glass-effect rounded-xl px-4 py-2.5 animate-slide-in"
         >
           <FileText class="w-4 h-4 text-primary-400/60 flex-shrink-0" />
           <span class="text-sm text-white/60 flex-1 truncate">{{ file.name }}</span>
           <CheckCircle v-if="uploadStatus.get(file.name) === 'success'" class="w-4 h-4 text-primary-400" />
           <AlertCircle v-else-if="uploadStatus.get(file.name) === 'error'" class="w-4 h-4 text-red-400" />
           <button
-            v-else
-            @click="removeFile(index)"
-            class="text-white/20 hover:text-white/60 transition-colors"
+              v-else
+              @click="removeFile(index)"
+              class="text-white/20 hover:text-white/60 transition-colors"
           >
             <X class="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      <!-- ио╢╚╟╢е╔ -->
+      <!-- Д╦┼Д╪═Ф▄┴И▓╝ -->
       <button
-        @click="uploadFiles"
-        :disabled="uploading"
-        class="w-full py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent text-white font-medium text-sm
+          @click="uploadFiles"
+          :disabled="uploading"
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent text-white font-medium text-sm
                hover:shadow-glow-lg transition-all duration-300
                disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        {{ uploading ? 'ио╢╚жп...' : '©╙й╪ио╢╚' }}
+        {{ uploading ? 'Д╦┼Д╪═Д╦╜...' : 'Е╪─Е╖▀Д╦┼Д╪═' }}
       </button>
     </div>
   </div>
